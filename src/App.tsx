@@ -6,6 +6,7 @@ import { exportPayload, initialState, lessonProgress, loadState, saveState, vali
 import type { AppState, Course, Goal as GoalType, Lesson, Note, ReviewRating } from './types'
 
 type Page = 'home' | 'library' | 'builder' | 'paths' | 'notes' | 'review' | 'goals' | 'analytics' | 'settings'
+interface InstallPromptEvent extends Event { prompt: () => Promise<void>; userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }> }
 const nav: { id: Page; label: string; icon: typeof Home }[] = [
   { id: 'home', label: 'Today', icon: Home }, { id: 'library', label: 'Library', icon: Library }, { id: 'builder', label: 'Course builder', icon: WandSparkles }, { id: 'paths', label: 'Learning paths', icon: GraduationCap },
   { id: 'notes', label: 'Notes', icon: NotebookPen }, { id: 'review', label: 'Review', icon: BrainCircuit }, { id: 'goals', label: 'Goals', icon: Target }, { id: 'analytics', label: 'Progress', icon: Activity },
@@ -22,6 +23,8 @@ function App() {
   const [dark, setDark] = useState(() => localStorage.getItem('learning-os:theme') === 'dark')
   const [toast, setToast] = useState('')
   const [quickFind, setQuickFind] = useState(false)
+  const [installPrompt, setInstallPrompt] = useState<InstallPromptEvent | null>(null)
+  const [installed, setInstalled] = useState(() => window.matchMedia('(display-mode: standalone)').matches)
 
   useEffect(() => saveState(state), [state])
   useEffect(() => { document.documentElement.dataset.theme = dark ? 'dark' : 'light'; localStorage.setItem('learning-os:theme', dark ? 'dark' : 'light') }, [dark])
@@ -33,6 +36,13 @@ function App() {
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
+  }, [])
+  useEffect(() => {
+    const onInstallPrompt = (event: Event) => { event.preventDefault(); setInstallPrompt(event as InstallPromptEvent) }
+    const onInstalled = () => { setInstalled(true); setInstallPrompt(null); announce('Learning OS installed') }
+    window.addEventListener('beforeinstallprompt', onInstallPrompt)
+    window.addEventListener('appinstalled', onInstalled)
+    return () => { window.removeEventListener('beforeinstallprompt', onInstallPrompt); window.removeEventListener('appinstalled', onInstalled) }
   }, [])
 
   const completedCount = state.completedLessons.length
@@ -51,6 +61,12 @@ function App() {
   const openCourse = (course: Course) => { setActiveCourse(course); setActiveLesson(null); setMobileNav(false); window.scrollTo(0, 0) }
   const openLesson = (lesson: Lesson, courseId?: string) => { if (courseId) setActiveCourse(availableCourses.find(course => course.id === courseId) ?? null); setActiveLesson({ ...lesson, courseId }); window.scrollTo(0, 0) }
   const go = (next: Page) => { setPage(next); setActiveCourse(null); setActiveLesson(null); setMobileNav(false); window.scrollTo(0, 0) }
+  const installApp = async () => {
+    if (!installPrompt) { announce(installed ? 'Learning OS is already installed' : 'Use your browser menu and choose Add to Home Screen'); return }
+    await installPrompt.prompt(); const choice = await installPrompt.userChoice
+    if (choice.outcome === 'accepted') setInstalled(true)
+    setInstallPrompt(null)
+  }
 
   return <div className="app-shell">
     <aside className={`sidebar ${mobileNav ? 'open' : ''}`}>
@@ -83,7 +99,7 @@ function App() {
         {!activeLesson && !activeCourse && page === 'review' && <ReviewPage state={state} availableLessons={availableLessons} update={update} openLesson={openLesson} announce={announce} />}
         {!activeLesson && !activeCourse && page === 'goals' && <GoalsPage state={state} update={update} announce={announce} />}
         {!activeLesson && !activeCourse && page === 'analytics' && <AnalyticsPage state={state} availableCourses={availableCourses} />}
-        {!activeLesson && !activeCourse && page === 'settings' && <SettingsPage state={state} setState={setState} dark={dark} setDark={setDark} announce={announce} />}
+        {!activeLesson && !activeCourse && page === 'settings' && <SettingsPage state={state} setState={setState} dark={dark} setDark={setDark} announce={announce} installApp={installApp} installed={installed} canInstall={Boolean(installPrompt)} />}
       </div>
     </main>
     {quickFind && <QuickFind courses={availableCourses} lessons={availableLessons} notes={state.notes} close={()=>setQuickFind(false)} openCourse={openCourse} openLesson={openLesson} openNotes={()=>go('notes')} />}
@@ -227,11 +243,11 @@ function AnalyticsPage({state,availableCourses}:{state:AppState;availableCourses
   return <><PageIntro eyebrow="SEE THE COMPOUND EFFECT" title="Progress analytics" text="A quiet view of what you have completed, practised and returned to."/><div className="analytics-grid"><section className="chart-card"><div className="section-heading compact"><div><p className="eyebrow">LAST 7 DAYS</p><h2>Focused minutes</h2></div><b>{total} min total</b></div><div className="bar-chart">{days.map(d=><div key={d.key}><span className="bar-value">{d.minutes||''}</span><i style={{height:`${Math.max(4,(d.minutes/max)*100)}%`}}/><small>{d.label}</small></div>)}</div></section><section className="chart-card"><p className="eyebrow">COURSE PROGRESS</p><h2>Across your library</h2><div className="course-progress-list">{availableCourses.map(c=>{const ids=c.modules.flatMap(m=>m.lessons.map(l=>l.id));const p=lessonProgress(state.completedLessons,ids);return <div key={c.id}><span>{c.icon}</span><div><b>{c.title}</b><div className="progress-line"><span style={{width:`${p}%`,background:c.accent}}/></div></div><em>{p}%</em></div>})}</div></section></div><section className="history-card"><p className="eyebrow">RECENT STUDY SESSIONS</p><h2>Study log</h2>{state.sessions.length===0?<Empty icon={Timer} title="No study time logged" text="Open a lesson and save your first focus session."/>:<div className="session-list">{state.sessions.slice().reverse().map(s=><div key={s.id}><span><Timer/></span><div><b>{s.note||'Focused study'}</b><small>{new Date(`${s.date}T12:00:00`).toLocaleDateString()} · {availableCourses.find(c=>c.id===s.courseId)?.title??'General learning'}</small></div><em>{s.minutes} min</em></div>)}</div>}</section></>
 }
 
-function SettingsPage({state,setState,dark,setDark,announce}:{state:AppState;setState:(s:AppState)=>void;dark:boolean;setDark:(v:boolean)=>void;announce:(m:string)=>void}) {
+function SettingsPage({state,setState,dark,setDark,announce,installApp,installed,canInstall}:{state:AppState;setState:(s:AppState)=>void;dark:boolean;setDark:(v:boolean)=>void;announce:(m:string)=>void;installApp:()=>void;installed:boolean;canInstall:boolean}) {
   const fileRef=useRef<HTMLInputElement>(null)
   const download=()=>{const blob=new Blob([exportPayload(state)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`learning-os-backup-${today()}.json`;a.click();URL.revokeObjectURL(a.href);announce('Backup exported')}
   const importFile=async(e:React.ChangeEvent<HTMLInputElement>)=>{const file=e.target.files?.[0];if(!file)return;try{setState(validateImport(JSON.parse(await file.text())));announce('Backup restored')}catch(err){announce(err instanceof Error?err.message:'Could not import backup')}e.target.value=''}
-  return <><PageIntro eyebrow="YOUR WORKSPACE" title="Settings & data" text="Learning OS is private by default. Your data lives in this browser and remains under your control."/><div className="settings-grid"><section className="settings-card"><span className="settings-icon"><Sun/></span><div><h2>Appearance</h2><p>Choose the theme that feels easiest to focus in.</p><div className="segment"><button className={!dark?'active':''} onClick={()=>setDark(false)}><Sun/>Light</button><button className={dark?'active':''} onClick={()=>setDark(true)}><Moon/>Dark</button></div></div></section><section className="settings-card"><span className="settings-icon"><Download/></span><div><h2>Backup your learning</h2><p>Export all progress, notes, goals, review schedule and personal courses as a readable JSON file. Upload it to Google Drive manually if desired.</p><button className="secondary" onClick={download}><Download/>Export backup</button></div></section><section className="settings-card"><span className="settings-icon"><Upload/></span><div><h2>Restore a backup</h2><p>Download your JSON backup from Google Drive, then choose it here. Importing replaces this browser's data.</p><input ref={fileRef} hidden type="file" accept="application/json" onChange={importFile}/><button className="secondary" onClick={()=>fileRef.current?.click()}><Upload/>Choose backup</button></div></section><section className="settings-card danger"><span className="settings-icon"><X/></span><div><h2>Reset workspace</h2><p>Erase local progress and return to the seeded learning library.</p><button className="secondary" onClick={()=>{if(confirm('Reset all local Learning OS data? This cannot be undone unless you exported a backup.')){setState(initialState);announce('Workspace reset')}}}>Reset all data</button></div></section></div><section className="privacy-card"><div><p className="eyebrow">PRIVACY BY DESIGN</p><h2>No account. No tracking. No hidden cloud.</h2><p>The app does not use an API or send learning data anywhere. Backups are ordinary JSON files that you control and can store manually in Google Drive.</p></div><span><Zap/></span></section></>
+  return <><PageIntro eyebrow="YOUR WORKSPACE" title="Settings & data" text="Learning OS is private by default. Your data lives in this browser and remains under your control."/><div className="settings-grid"><section className="settings-card"><span className="settings-icon"><Sun/></span><div><h2>Appearance</h2><p>Choose the theme that feels easiest to focus in.</p><div className="segment"><button className={!dark?'active':''} onClick={()=>setDark(false)}><Sun/>Light</button><button className={dark?'active':''} onClick={()=>setDark(true)}><Moon/>Dark</button></div></div></section><section className="settings-card"><span className="settings-icon"><Download/></span><div><h2>{installed?'Installed on this device':'Install Learning OS'}</h2><p>{installed?'Open it from your home screen or applications. Core pages remain available without a connection.':'Add it to your phone or computer and keep core pages available offline.'}</p><button className="secondary" onClick={installApp}>{installed?<CheckCircle2/>:<Download/>}{installed?'Installed':canInstall?'Install app':'How to install'}</button></div></section><section className="settings-card"><span className="settings-icon"><Download/></span><div><h2>Backup your learning</h2><p>Export all progress, notes, goals, review schedule and personal courses as a readable JSON file. Upload it to Google Drive manually if desired.</p><button className="secondary" onClick={download}><Download/>Export backup</button></div></section><section className="settings-card"><span className="settings-icon"><Upload/></span><div><h2>Restore a backup</h2><p>Download your JSON backup from Google Drive, then choose it here. Importing replaces this browser's data.</p><input ref={fileRef} hidden type="file" accept="application/json" onChange={importFile}/><button className="secondary" onClick={()=>fileRef.current?.click()}><Upload/>Choose backup</button></div></section><section className="settings-card danger"><span className="settings-icon"><X/></span><div><h2>Reset workspace</h2><p>Erase local progress and return to the seeded learning library.</p><button className="secondary" onClick={()=>{if(confirm('Reset all local Learning OS data? This cannot be undone unless you exported a backup.')){setState(initialState);announce('Workspace reset')}}}>Reset all data</button></div></section></div><section className="privacy-card"><div><p className="eyebrow">PRIVACY BY DESIGN</p><h2>No account. No tracking. No hidden cloud.</h2><p>The app does not use an API or send learning data anywhere. Backups are ordinary JSON files that you control and can store manually in Google Drive.</p></div><span><Zap/></span></section></>
 }
 
 function PageIntro({eyebrow,title,text}:{eyebrow:string;title:string;text:string}) { return <section className="page-intro"><p className="eyebrow">{eyebrow}</p><h1>{title}</h1><p>{text}</p></section> }
