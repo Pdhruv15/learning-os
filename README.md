@@ -10,6 +10,7 @@ The starter library includes an advanced 12-lesson Low-Voltage Electrical Design
 - Personal course builder for YouTube playlists, individual videos and AI-generated lesson lists
 - Ordered custom lessons with a **Next lesson** action after completion
 - Progress tracking, bookmarks, notes and knowledge checks
+- Editable, searchable notes with tags, pinning and autosave
 - Goals, study-session logging, streaks and seven-day analytics
 - Light and dark themes
 - Browser-local persistence using `localStorage`
