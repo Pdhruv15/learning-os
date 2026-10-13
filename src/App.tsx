@@ -21,10 +21,19 @@ function App() {
   const [mobileNav, setMobileNav] = useState(false)
   const [dark, setDark] = useState(() => localStorage.getItem('learning-os:theme') === 'dark')
   const [toast, setToast] = useState('')
+  const [quickFind, setQuickFind] = useState(false)
 
   useEffect(() => saveState(state), [state])
   useEffect(() => { document.documentElement.dataset.theme = dark ? 'dark' : 'light'; localStorage.setItem('learning-os:theme', dark ? 'dark' : 'light') }, [dark])
   useEffect(() => { if (!toast) return; const timer = setTimeout(() => setToast(''), 2500); return () => clearTimeout(timer) }, [toast])
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); setQuickFind(value => !value) }
+      if (event.key === 'Escape') setQuickFind(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [])
 
   const completedCount = state.completedLessons.length
   const availableCourses = useMemo(() => [...courses, ...state.customCourses], [state.customCourses])
@@ -60,6 +69,7 @@ function App() {
       <header className="topbar">
         <button className="icon-btn menu-btn" onClick={() => setMobileNav(true)} aria-label="Open menu"><Menu /></button>
         <div className="crumb">{activeLesson ? <><button onClick={() => setActiveLesson(null)}>{activeCourse?.title ?? 'Lesson'}</button><ChevronRight size={14}/><span>{activeLesson.title}</span></> : activeCourse ? <><button onClick={() => go('library')}>Library</button><ChevronRight size={14}/><span>{activeCourse.title}</span></> : <span>{nav.find(n=>n.id===page)?.label}</span>}</div>
+        <button className="quick-search" onClick={()=>{setQuickFind(true);setMobileNav(false)}} aria-label="Search courses, lessons and notes"><Search/><span>Search anything…</span><kbd>{navigator.platform.includes('Mac')?'⌘':'Ctrl'} K</kbd></button>
         <div className="top-actions"><span className="privacy"><span/> Saved locally</span><button className="icon-btn" onClick={()=>setDark(!dark)} aria-label="Toggle theme">{dark?<Sun/>:<Moon/>}</button></div>
       </header>
       <div className="content">
@@ -76,8 +86,30 @@ function App() {
         {!activeLesson && !activeCourse && page === 'settings' && <SettingsPage state={state} setState={setState} dark={dark} setDark={setDark} announce={announce} />}
       </div>
     </main>
+    {quickFind && <QuickFind courses={availableCourses} lessons={availableLessons} notes={state.notes} close={()=>setQuickFind(false)} openCourse={openCourse} openLesson={openLesson} openNotes={()=>go('notes')} />}
     {toast && <div className="toast"><CheckCircle2 size={18}/>{toast}</div>}
   </div>
+}
+
+function QuickFind({courses,lessons,notes,close,openCourse,openLesson,openNotes}:{courses:Course[];lessons:(Lesson&{courseId:string;courseTitle:string;moduleTitle:string})[];notes:Note[];close:()=>void;openCourse:(course:Course)=>void;openLesson:(lesson:Lesson,courseId?:string)=>void;openNotes:()=>void}) {
+  const [query,setQuery]=useState(''); const inputRef=useRef<HTMLInputElement>(null)
+  useEffect(()=>inputRef.current?.focus(),[])
+  const term=query.trim().toLowerCase()
+  const courseResults=term?courses.filter(course=>`${course.title} ${course.description} ${course.category}`.toLowerCase().includes(term)).slice(0,4):[]
+  const lessonResults=term?lessons.filter(lesson=>`${lesson.title} ${lesson.summary} ${lesson.courseTitle} ${lesson.moduleTitle}`.toLowerCase().includes(term)).slice(0,7):[]
+  const noteResults=term?notes.filter(note=>`${note.title} ${note.body}`.toLowerCase().includes(term)).slice(0,4):[]
+  const resultCount=courseResults.length+lessonResults.length+noteResults.length
+  const choose=(action:()=>void)=>{close();action()}
+  return <div className="quick-find-backdrop" onMouseDown={event=>{if(event.target===event.currentTarget)close()}}><section className="quick-find-dialog" role="dialog" aria-modal="true" aria-label="Quick Find">
+    <div className="quick-find-input"><Search/><input ref={inputRef} aria-label="Quick Find search" placeholder="Search courses, lessons and notes…" value={query} onChange={event=>setQuery(event.target.value)}/><button onClick={close} aria-label="Close search"><X/></button></div>
+    <div className="quick-find-results">
+      {!term&&<div className="quick-find-hint"><Sparkles/><h2>Find anything in your learning space</h2><p>Search by lesson, topic, course, or words from one of your notes.</p><span>Tip: press <kbd>{navigator.platform.includes('Mac')?'⌘ K':'Ctrl K'}</kbd> anytime</span></div>}
+      {term&&resultCount===0&&<Empty icon={Search} title="Nothing found" text="Try another topic or a shorter search."/>}
+      {courseResults.length>0&&<div className="quick-find-group"><p className="eyebrow">COURSES</p>{courseResults.map(course=><button key={course.id} onClick={()=>choose(()=>openCourse(course))}><span className="quick-result-icon">{course.icon}</span><div><b>{course.title}</b><small>{course.category} · {course.level}</small></div><ChevronRight/></button>)}</div>}
+      {lessonResults.length>0&&<div className="quick-find-group"><p className="eyebrow">LESSONS</p>{lessonResults.map(lesson=><button key={lesson.id} onClick={()=>choose(()=>openLesson(lesson,lesson.courseId))}><span className="quick-result-icon"><BookOpen/></span><div><b>{lesson.title}</b><small>{lesson.courseTitle} · {lesson.moduleTitle}</small></div><ChevronRight/></button>)}</div>}
+      {noteResults.length>0&&<div className="quick-find-group"><p className="eyebrow">NOTES</p>{noteResults.map(note=><button key={note.id} onClick={()=>choose(openNotes)}><span className="quick-result-icon"><NotebookPen/></span><div><b>{note.title}</b><small>{note.body}</small></div><ChevronRight/></button>)}</div>}
+    </div>
+  </section></div>
 }
 
 function Dashboard({ state, completedCount, totalMinutes, streak, availableCourses, availableLessons, openCourse, openLesson, go }: { state: AppState; completedCount: number; totalMinutes: number; streak: number; availableCourses: Course[]; availableLessons: (Lesson & {courseId:string;courseTitle:string;moduleTitle:string})[]; openCourse: (c: Course)=>void; openLesson: (l: Lesson, c?: string)=>void; go: (p: Page)=>void }) {

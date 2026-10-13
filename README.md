@@ -15,6 +15,7 @@ The starter library includes an advanced 12-lesson Low-Voltage Electrical Design
 - Browser-local persistence using `localStorage`
 - Complete JSON data export and import
 - Smart revision scheduling for completed and difficult lessons
+- Global Quick Find for courses, lessons and notes (`Ctrl+K` or `⌘K`)
 - Seeded external free learning resources; no video hosting
 - Cloudflare Pages routing and security-header files
 - No account, cookies, analytics, advertising or third-party data sync
