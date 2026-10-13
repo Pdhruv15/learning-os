@@ -10,4 +10,6 @@ export interface QuizQuestion { id: string; prompt: string; options: string[]; a
 export interface Note { id: string; lessonId?: string; title: string; body: string; updatedAt: string }
 export interface Goal { id: string; title: string; target: number; unit: 'lessons' | 'minutes' | 'sessions'; due: string; completed: boolean }
 export interface StudySession { id: string; courseId?: string; minutes: number; date: string; note: string }
-export interface AppState { completedLessons: string[]; bookmarks: string[]; notes: Note[]; goals: Goal[]; sessions: StudySession[]; quizScores: Record<string, number>; streakDates: string[]; onboardingDone: boolean; customCourses: Course[] }
+export type ReviewRating = 'again' | 'hard' | 'good' | 'easy'
+export interface ReviewSchedule { lessonId: string; due: string; intervalDays: number; repetitions: number; lastReviewed?: string; lastRating?: ReviewRating }
+export interface AppState { completedLessons: string[]; bookmarks: string[]; notes: Note[]; goals: Goal[]; sessions: StudySession[]; quizScores: Record<string, number>; streakDates: string[]; onboardingDone: boolean; customCourses: Course[]; reviews: Record<string, ReviewSchedule> }

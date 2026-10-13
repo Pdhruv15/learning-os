@@ -14,6 +14,7 @@ The starter library includes an advanced 12-lesson Low-Voltage Electrical Design
 - Light and dark themes
 - Browser-local persistence using `localStorage`
 - Complete JSON data export and import
+- Smart revision scheduling for completed and difficult lessons
 - Seeded external free learning resources; no video hosting
 - Cloudflare Pages routing and security-header files
 - No account, cookies, analytics, advertising or third-party data sync
@@ -45,6 +46,7 @@ The production output is written to `dist/`.
 src/
   App.tsx       UI and interactions
   data.ts       Seeded courses, paths and external resources
+  review.ts      Local spaced-repetition scheduling helpers
   store.ts      Local persistence, backup and progress helpers
   styles.css    Responsive visual system
   types.ts      Application data model
@@ -87,6 +89,10 @@ Learning data is stored in the current browser profile under the key `learning-o
 External resources open in a new tab. Their privacy policies apply once opened. The app uses `noopener`/`noreferrer` behaviour for these links and deploys a restrictive Content Security Policy. Review and update the policy before adding analytics, embedded services, APIs or new origins.
 
 The JSON import performs structural validation, but backups should still be imported only from a source you trust. The app treats imported note content as plain text rather than HTML.
+
+## Personal backup with Google Drive
+
+No Google API or application credential is required. Use **Settings & data → Export backup**, then upload the generated JSON file to a private Google Drive folder. To restore it, download the file from Drive and choose **Restore a backup**. The backup contains personal courses, revision schedules, progress, notes, goals, sessions, bookmarks and quiz scores.
 
 ## Future optional Supabase sync
 

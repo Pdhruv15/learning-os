@@ -8,5 +8,9 @@ describe('Learning OS data helpers', () => {
     const state = { ...initialState, customCourses: [{ id: 'mine', title: 'My course', category: 'Personal' as const, level: 'Beginner' as const, description: 'Personal links', accent: '#397a72', icon: '◇', modules: [] }] }
     expect(validateImport(JSON.parse(exportPayload(state))).customCourses[0].title).toBe('My course')
   })
+  it('migrates older backups without revision data', () => {
+    const oldBackup = { app: 'Learning OS', version: 1, data: { completedLessons: ['lesson-1'] } }
+    expect(validateImport(oldBackup).reviews).toEqual({})
+  })
   it('rejects unrelated JSON', () => expect(() => validateImport({ hello: 'world' })).toThrow())
 })
