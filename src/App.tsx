@@ -3,6 +3,7 @@ import { Activity, ArrowDown, ArrowLeft, ArrowUp, BookOpen, Bookmark, BookmarkCh
 import { courses, learningPaths } from './data'
 import { pauseFocusTimer, remainingFocusSeconds, resetFocusTimer, startFocusTimer } from './focus'
 import { currentGoalValue, goalProgress } from './goals'
+import { buildDailyPlan } from './plan'
 import { isReviewDue, rateReview, startReview } from './review'
 import { exportPayload, initialState, lessonProgress, loadState, saveState, validateImport } from './store'
 import type { AppState, Course, FocusTimer, Goal as GoalType, Lesson, Note, ReviewRating } from './types'
@@ -136,6 +137,14 @@ function QuickFind({courses,lessons,notes,close,openCourse,openLesson,openNotes}
 function Dashboard({ state, completedCount, totalMinutes, streak, availableCourses, availableLessons, openCourse, openLesson, go }: { state: AppState; completedCount: number; totalMinutes: number; streak: number; availableCourses: Course[]; availableLessons: (Lesson & {courseId:string;courseTitle:string;moduleTitle:string})[]; openCourse: (c: Course)=>void; openLesson: (l: Lesson, c?: string)=>void; go: (p: Page)=>void }) {
   const next = availableLessons.find(l => !state.completedLessons.includes(l.id)) ?? availableLessons[0]
   const course = availableCourses.find(c => c.id === next.courseId)!
+  const dailyPlan = buildDailyPlan(state, availableLessons)
+  const planMinutes = dailyPlan.reduce((sum, item) => sum + item.minutes, 0)
+  const openPlanItem = (item: (typeof dailyPlan)[number]) => {
+    if (item.kind === 'review') return go('review')
+    if (item.kind === 'goal') return go('goals')
+    const lesson = availableLessons.find(candidate => candidate.id === item.lessonId)
+    if (lesson) openLesson(lesson, item.courseId)
+  }
   return <>
     <section className="welcome"><div><p className="eyebrow">{new Date().toLocaleDateString('en',{weekday:'long'}).toUpperCase()} · YOUR LEARNING SPACE</p><h1>Good morning. <em>What will you learn?</em></h1><p>Keep building useful knowledge—one focused session at a time.</p></div><div className="date-tile"><span>{new Date().toLocaleDateString('en',{month:'short'}).toUpperCase()}</span><b>{new Date().getDate()}</b></div></section>
     <section className="metric-grid">
@@ -151,7 +160,7 @@ function Dashboard({ state, completedCount, totalMinutes, streak, availableCours
     </section>
     <div className="two-col home-bottom">
       <section><div className="section-heading compact"><div><p className="eyebrow">CURATED FOR YOU</p><h2>Featured courses</h2></div></div><div className="course-grid">{courses.filter(c=>c.featured).map(c=><CourseCard key={c.id} course={c} state={state} onClick={()=>openCourse(c)} />)}</div></section>
-      <aside className="today-plan"><p className="eyebrow">TODAY'S FOCUS</p><h2>A calm 45 minutes</h2><div className="focus-row"><span><Play size={17}/></span><div><b>Learn</b><small>Complete one focused lesson</small></div><em>30m</em></div><div className="focus-row"><span><NotebookPen size={17}/></span><div><b>Recall</b><small>Write three useful notes</small></div><em>10m</em></div><div className="focus-row"><span><Check size={17}/></span><div><b>Review</b><small>Try the lesson check</small></div><em>5m</em></div><button className="secondary" onClick={()=>go('focus')}>Begin focus session</button></aside>
+      <aside className="today-plan"><p className="eyebrow">YOUR DAILY PLAN</p><div className="plan-heading"><h2>{dailyPlan.length ? `${planMinutes} focused minutes` : 'You are all caught up'}</h2><span>{dailyPlan.length} {dailyPlan.length===1?'step':'steps'}</span></div>{dailyPlan.length ? dailyPlan.map(item=>{const Icon=item.kind==='review'?BrainCircuit:item.kind==='goal'?Target:BookOpen;return <button className="focus-row" key={item.id} onClick={()=>openPlanItem(item)}><span><Icon size={17}/></span><div><b>{item.title}</b><small>{item.detail}</small></div><em>{item.minutes}m</em><ChevronRight/></button>}) : <div className="plan-clear"><CheckCircle2/><p>Nothing urgent. Explore the library or start a free-focus session.</p></div>}<button className="secondary" onClick={()=>go('focus')}><Timer size={16}/>Start focus session</button></aside>
     </div>
   </>
 }

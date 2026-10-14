@@ -15,6 +15,7 @@ The starter library includes an advanced 12-lesson Low-Voltage Electrical Design
 - Distraction-free focus timer with automatic study-session logging
 - Goals, study-session logging, streaks and seven-day analytics
 - Automatic goal progress from lessons, focused minutes and sessions
+- Personalized daily planning from due revision, urgent goals and unfinished lessons
 - Light and dark themes
 - Browser-local persistence using `localStorage`
 - Complete JSON data export and import
@@ -52,6 +53,7 @@ The production output is written to `dist/`.
 src/
   App.tsx       UI and interactions
   data.ts       Seeded courses, paths and external resources
+  plan.ts       Local daily-plan prioritization helpers
   review.ts      Local spaced-repetition scheduling helpers
   store.ts      Local persistence, backup and progress helpers
   styles.css    Responsive visual system
