@@ -4,7 +4,7 @@ export const STORAGE_KEY = 'learning-os:v1'
 export const initialState: AppState = {
   completedLessons: [], bookmarks: [], notes: [], goals: [
     { id: 'goal-1', title: 'Complete 3 lessons this week', target: 3, unit: 'lessons', due: new Date(Date.now() + 6 * 86400000).toISOString().slice(0, 10), completed: false }
-  ], sessions: [], quizScores: {}, streakDates: [], onboardingDone: false, customCourses: [], reviews: {},
+  ], sessions: [], quizScores: {}, streakDates: [], onboardingDone: false, customCourses: [], reviews: {}, flashcards: [],
 }
 
 export function loadState(): AppState {
@@ -12,7 +12,7 @@ export function loadState(): AppState {
     const saved = localStorage.getItem(STORAGE_KEY)
     if (!saved) return initialState
     const data = JSON.parse(saved) as Partial<AppState>
-    return { ...initialState, ...data, reviews: data.reviews ?? {} }
+    return { ...initialState, ...data, reviews: data.reviews ?? {}, flashcards: data.flashcards ?? [] }
   } catch { return initialState }
 }
 
@@ -24,5 +24,5 @@ export function validateImport(value: unknown): AppState {
   const data = (value as { data: unknown }).data
   if (!data || typeof data !== 'object' || !Array.isArray((data as AppState).completedLessons)) throw new Error('The backup data is incomplete.')
   const imported = data as Partial<AppState>
-  return { ...initialState, ...imported, reviews: imported.reviews ?? {} }
+  return { ...initialState, ...imported, reviews: imported.reviews ?? {}, flashcards: imported.flashcards ?? [] }
 }

@@ -11,6 +11,7 @@ describe('Learning OS data helpers', () => {
   it('migrates older backups without revision data', () => {
     const oldBackup = { app: 'Learning OS', version: 1, data: { completedLessons: ['lesson-1'] } }
     expect(validateImport(oldBackup).reviews).toEqual({})
+    expect(validateImport(oldBackup).flashcards).toEqual([])
   })
   it('rejects unrelated JSON', () => expect(() => validateImport({ hello: 'world' })).toThrow())
 })

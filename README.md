@@ -11,6 +11,7 @@ The starter library includes an advanced 12-lesson Low-Voltage Electrical Design
 - Ordered custom lessons with a **Next lesson** action after completion
 - Progress tracking, bookmarks, notes and knowledge checks
 - Editable, searchable notes with tags, pinning and autosave
+- Course-notebook view and note-to-flashcard conversion
 - Distraction-free focus timer with automatic study-session logging
 - Goals, study-session logging, streaks and seven-day analytics
 - Light and dark themes
