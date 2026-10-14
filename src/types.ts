@@ -9,7 +9,7 @@ export interface LearningPath { id: string; title: string; description: string; 
 export interface QuizQuestion { id: string; prompt: string; options: string[]; answer: number; explanation: string }
 export interface Note { id: string; lessonId?: string; title: string; body: string; updatedAt: string; tags?: string[]; pinned?: boolean }
 export interface Flashcard { id: string; noteId: string; question: string; answer: string; review: ReviewSchedule }
-export interface Goal { id: string; title: string; target: number; unit: 'lessons' | 'minutes' | 'sessions'; due: string; completed: boolean }
+export interface Goal { id: string; title: string; target: number; unit: 'lessons' | 'minutes' | 'sessions'; due: string; completed: boolean; createdAt?: string; startValue?: number }
 export interface StudySession { id: string; courseId?: string; minutes: number; date: string; note: string }
 export interface FocusTimer { status: 'idle' | 'running' | 'paused'; durationMinutes: number; remainingSeconds: number; startedAt?: number; lessonId?: string }
 export type ReviewRating = 'again' | 'hard' | 'good' | 'easy'

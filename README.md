@@ -14,6 +14,7 @@ The starter library includes an advanced 12-lesson Low-Voltage Electrical Design
 - Course-notebook view and note-to-flashcard conversion
 - Distraction-free focus timer with automatic study-session logging
 - Goals, study-session logging, streaks and seven-day analytics
+- Automatic goal progress from lessons, focused minutes and sessions
 - Light and dark themes
 - Browser-local persistence using `localStorage`
 - Complete JSON data export and import
