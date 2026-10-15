@@ -73,11 +73,102 @@ export const courses: Course[] = [
       ]}
     ]
   },
+  {
+    id: 'electron-typescript-14-day', title: 'Electron + TypeScript in 14 Days', category: 'Programming', level: 'Beginner', accent: '#5b8def', icon: '◈', featured: true,
+    description: 'Build, debug, secure and package a desktop app in 14 practical days, with Tamil-first videos and hands-on terminal exercises.',
+    modules: [
+      { id: 'et-m1', title: 'Days 1–2 · Terminal & project navigation', description: 'Build confidence moving around a project and understanding what commands change.', lessons: [
+        { id: 'et-01', title: 'Day 1: Terminal foundations', minutes: 50, summary: 'Navigate safely, inspect files and learn where a command will run before changing anything.', objectives: ['Practise pwd, ls, cd and clear', 'Create a sandbox with mkdir and touch', 'Inspect text with cat, head and tail'], resources: [
+          { title: 'Terminal commands for beginners — Tamil', url: yt('terminal commands beginners Tamil pwd ls cd mkdir'), kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: map your app folder in Terminal', url: yt('Mac terminal file navigation practice'), kind: 'Practice', language: 'English' },
+          { title: 'Command-line interface basics', url: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Environment_setup/Command_line', kind: 'Guide', language: 'English' }
+        ] },
+        { id: 'et-02', title: 'Day 2: Files, search & safe command habits', minutes: 55, summary: 'Find code quickly, read command help and avoid destructive file operations.', objectives: ['Practise cp, mv, rm and mkdir -p in a sandbox', 'Search files with find and text with grep', 'Use command --help, history and Ctrl+C'], resources: [
+          { title: 'Linux and Mac commands — Tamil', url: yt('Linux commands Tamil grep find cp mv rm'), kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: terminal scavenger hunt', url: yt('command line scavenger hunt beginners'), kind: 'Practice', language: 'English' },
+          { title: 'GNU grep manual', url: 'https://www.gnu.org/software/grep/manual/grep.html', kind: 'Guide', language: 'English' }
+        ] }
+      ]},
+      { id: 'et-m2', title: 'Days 3–4 · Git, GitHub & npm', description: 'Protect your work with version control and understand the Node package workflow.', lessons: [
+        { id: 'et-03', title: 'Day 3: Git without fear', minutes: 65, summary: 'Create small, reviewable commits and recover context when something changes.', objectives: ['Practise git status, diff and log --oneline', 'Stage intentionally with git add', 'Create a clear commit with git commit'], resources: [
+          { title: 'Git & GitHub complete tutorial — Tamil', url: 'https://www.youtube.com/watch?v=WzO6VynQ7UM', kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: branch, edit, diff and commit', url: yt('Git branching exercise beginners'), kind: 'Practice', language: 'English' },
+          { title: 'Pro Git book', url: 'https://git-scm.com/book/en/v2', kind: 'Guide', language: 'English' }
+        ], quiz: [{ id: 'et-q03', prompt: 'Which command shows unstaged changes before you commit?', options: ['git diff', 'git clone', 'git push', 'git init'], answer: 0, explanation: 'git diff lets you inspect working-tree changes before staging or committing them.' }] },
+        { id: 'et-04', title: 'Day 4: Node.js, npm & project scripts', minutes: 60, summary: 'Understand dependencies, lockfiles and the scripts that run, test and build an application.', objectives: ['Check node --version and npm --version', 'Use npm install and npm run safely', 'Read package.json and explain package-lock.json'], resources: [
+          { title: 'Node.js and npm tutorial — Tamil', url: yt('Node.js npm tutorial Tamil package json'), kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: inspect npm scripts and dependency tree', url: yt('npm scripts tutorial practice'), kind: 'Practice', language: 'English' },
+          { title: 'npm CLI documentation', url: 'https://docs.npmjs.com/cli/', kind: 'Guide', language: 'English' }
+        ] }
+      ]},
+      { id: 'et-m3', title: 'Days 5–6 · TypeScript essentials', description: 'Read and change typed application code with confidence.', lessons: [
+        { id: 'et-05', title: 'Day 5: Types, functions & interfaces', minutes: 105, summary: 'Use TypeScript to make application inputs, outputs and shared data structures explicit.', objectives: ['Annotate values and function returns', 'Model objects with interfaces and type aliases', 'Run npx tsc --noEmit to check code'], resources: [
+          { title: 'Learn TypeScript in 97.3 minutes — Tamil', url: 'https://www.youtube.com/watch?v=70KEMxrG8e4', kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: type a settings object', url: yt('TypeScript interface exercise beginners'), kind: 'Practice', language: 'English' },
+          { title: 'TypeScript handbook', url: 'https://www.typescriptlang.org/docs/handbook/intro.html', kind: 'Guide', language: 'English' }
+        ] },
+        { id: 'et-06', title: 'Day 6: Narrowing, async code & modules', minutes: 70, summary: 'Follow real application control flow across imports, promises and error paths.', objectives: ['Narrow unions before using values', 'Use async/await with try/catch', 'Trace imports and exports across modules'], resources: [
+          { title: 'TypeScript async await — Tamil', url: yt('TypeScript async await modules Tamil'), kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: type an async file-loading result', url: yt('TypeScript async await exercise'), kind: 'Practice', language: 'English' },
+          { title: 'TypeScript narrowing', url: 'https://www.typescriptlang.org/docs/handbook/2/narrowing.html', kind: 'Guide', language: 'English' }
+        ] }
+      ]},
+      { id: 'et-m4', title: 'Days 7–8 · Electron architecture', description: 'Understand the desktop runtime and build a secure bridge between processes.', lessons: [
+        { id: 'et-07', title: 'Day 7: Main, renderer & preload', minutes: 70, summary: 'Map Electron’s process model and identify where windows, UI and privileged APIs belong.', objectives: ['Explain the main and renderer processes', 'Create and inspect a BrowserWindow', 'Use DevTools and terminal logs together'], resources: [
+          { title: 'Electron JS explained in 10 minutes — Tamil', url: 'https://www.youtube.com/watch?v=RhuTgUd6n1A', kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: label your app process boundaries', url: yt('Electron main renderer preload exercise'), kind: 'Practice', language: 'English' },
+          { title: 'Electron process model', url: 'https://www.electronjs.org/docs/latest/tutorial/process-model', kind: 'Guide', language: 'English' }
+        ], quiz: [{ id: 'et-q07', prompt: 'Where should BrowserWindow instances normally be created?', options: ['Renderer process', 'Main process', 'CSS file', 'package-lock.json'], answer: 1, explanation: 'BrowserWindow is a privileged Electron API managed in the main process.' }] },
+        { id: 'et-08', title: 'Day 8: IPC & contextBridge', minutes: 80, summary: 'Expose narrow typed capabilities to the UI without giving it unrestricted Node.js access.', objectives: ['Implement ipcMain.handle and ipcRenderer.invoke', 'Expose a minimal preload API with contextBridge', 'Validate messages at the trust boundary'], resources: [
+          { title: 'Electron IPC contextBridge — Tamil', url: yt('Electron IPC contextBridge Tamil'), kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: add a typed app-version bridge', url: yt('Electron IPC tutorial exercise'), kind: 'Practice', language: 'English' },
+          { title: 'Electron IPC tutorial', url: 'https://www.electronjs.org/docs/latest/tutorial/ipc', kind: 'Guide', language: 'English' }
+        ] }
+      ]},
+      { id: 'et-m5', title: 'Days 9–10 · Debugging, tests & security', description: 'Diagnose failures systematically and protect the Electron attack surface.', lessons: [
+        { id: 'et-09', title: 'Day 9: Debugging & automated tests', minutes: 75, summary: 'Turn a vague failure into a reproducible case, inspect both processes and prevent regressions.', objectives: ['Use breakpoints, stack traces and source maps', 'Run npm test and target one test file', 'Write a focused regression test'], resources: [
+          { title: 'JavaScript debugging and testing — Tamil', url: yt('JavaScript debugging unit testing Tamil'), kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: reproduce, isolate, test, fix', url: yt('debugging workflow coding exercise'), kind: 'Practice', language: 'English' },
+          { title: 'Electron debugging', url: 'https://www.electronjs.org/docs/latest/tutorial/debugging-main-process', kind: 'Guide', language: 'English' }
+        ] },
+        { id: 'et-10', title: 'Day 10: Electron security checklist', minutes: 70, summary: 'Apply secure defaults for remote content, navigation, permissions and inter-process APIs.', objectives: ['Keep contextIsolation enabled and nodeIntegration disabled', 'Restrict navigation and new windows', 'Review dependencies with npm audit'], resources: [
+          { title: 'Electron security best practices — Tamil', url: yt('Electron security contextIsolation nodeIntegration Tamil'), kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: audit an Electron BrowserWindow config', url: yt('Electron security checklist tutorial'), kind: 'Practice', language: 'English' },
+          { title: 'Electron security checklist', url: 'https://www.electronjs.org/docs/latest/tutorial/security', kind: 'Guide', language: 'English' }
+        ] }
+      ]},
+      { id: 'et-m6', title: 'Days 11–12 · Build, package & automate', description: 'Create distributable applications and repeatable checks.', lessons: [
+        { id: 'et-11', title: 'Day 11: Build & package installers', minutes: 85, summary: 'Separate development from production builds and create a distributable package for testing.', objectives: ['Run npm run build and inspect output', 'Package with Electron Forge', 'Understand signing and platform-specific builds'], resources: [
+          { title: 'Electron build and package — Tamil', url: yt('Electron app build package installer Tamil'), kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: create a local distributable', url: yt('Electron Forge package make tutorial'), kind: 'Practice', language: 'English' },
+          { title: 'Electron packaging tutorial', url: 'https://www.electronjs.org/docs/latest/tutorial/tutorial-packaging', kind: 'Guide', language: 'English' }
+        ] },
+        { id: 'et-12', title: 'Day 12: GitHub Actions CI', minutes: 75, summary: 'Run install, type-check, test and build automatically on every proposed change.', objectives: ['Create a pull-request workflow', 'Use npm ci for repeatable installs', 'Read logs and download build artifacts'], resources: [
+          { title: 'GitHub Actions tutorial — Tamil', url: yt('GitHub Actions CI CD Tamil tutorial Node.js'), kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: add a Node CI workflow', url: yt('GitHub Actions Node CI hands on'), kind: 'Practice', language: 'English' },
+          { title: 'GitHub Actions for Node.js', url: 'https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-nodejs', kind: 'Guide', language: 'English' }
+        ] }
+      ]},
+      { id: 'et-m7', title: 'Days 13–14 · Release workflow & capstone', description: 'Bring the habits together in a shippable feature and a documented release.', lessons: [
+        { id: 'et-13', title: 'Day 13: Releases, updates & troubleshooting', minutes: 70, summary: 'Prepare a release deliberately and use logs, versions and clean installs to diagnose user reports.', objectives: ['Choose semantic version numbers', 'Write a useful changelog entry', 'Practise npm ci, npm run build and a clean launch'], resources: [
+          { title: 'Semantic versioning and releases — Tamil', url: yt('semantic versioning software release Tamil'), kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: diagnose a failed production build', url: yt('npm build troubleshooting exercise'), kind: 'Practice', language: 'English' },
+          { title: 'Electron application updates', url: 'https://www.electronjs.org/docs/latest/tutorial/updates', kind: 'Guide', language: 'English' }
+        ] },
+        { id: 'et-14', title: 'Day 14: Capstone — ship one LV Design Suite feature', minutes: 150, summary: 'Plan, implement, test and package one small desktop feature using the full 14-day workflow.', objectives: ['Create a feature branch and acceptance checklist', 'Build a typed IPC feature with safe validation', 'Test, package and document the release'], resources: [
+          { title: 'Electron TypeScript project — Tamil', url: yt('Electron TypeScript full project Tamil'), kind: 'Video', language: 'Tamil' },
+          { title: 'Practice: feature branch to packaged app', url: yt('Electron TypeScript capstone project'), kind: 'Practice', language: 'English' },
+          { title: 'Electron first-app tutorial', url: 'https://www.electronjs.org/docs/latest/tutorial/tutorial-first-app', kind: 'Guide', language: 'English' }
+        ], quiz: [{ id: 'et-q14', prompt: 'What is the strongest evidence that a change is ready to release?', options: ['It works once on the developer machine', 'The code is short', 'Acceptance checks, tests and a packaged build pass', 'The branch has many commits'], answer: 2, explanation: 'Release confidence comes from explicit acceptance criteria, automated checks and testing the distributable artifact.' }] }
+      ]}
+    ]
+  },
   { id: 'technical-writing', title: 'Technical Writing Essentials', category: 'Personal', level: 'Intermediate', accent: '#7868b5', icon: '✦', description: 'Write clear engineering notes, reports and decision records.', modules: [{ id: 'tw-m1', title: 'Clarity at work', description: 'Make technical communication easier to act on.', lessons: [{ id: 'tw-01', title: 'Write for decisions', minutes: 30, summary: 'Structure a technical note around context, evidence and a clear recommendation.', objectives: ['Identify the reader decision', 'Separate facts from assumptions', 'End with ownership'], resources: [{ title: 'Google technical writing course', url: 'https://developers.google.com/tech-writing', kind: 'Guide', language: 'English' }] }, { id: 'tw-02', title: 'Diagrams and calculation narratives', minutes: 35, summary: 'Explain calculation inputs and results without burying the conclusion.', objectives: ['Build a calculation narrative', 'Label diagrams purposefully', 'State limits'], resources: [{ title: 'Technical writing resources', url: 'https://developers.google.com/tech-writing/resources', kind: 'Guide', language: 'English' }] }] }] },
   { id: 'math-refresh', title: 'Applied Mathematics Refresh', category: 'Science', level: 'Intermediate', accent: '#c2912f', icon: '∑', description: 'Refresh algebra, trigonometry and units through engineering examples.', modules: [{ id: 'ma-m1', title: 'Engineering maths', description: 'Confident calculation habits.', lessons: [{ id: 'ma-01', title: 'Units, ratios & scientific notation', minutes: 35, summary: 'Use dimensional checks to catch calculation errors.', objectives: ['Convert SI prefixes', 'Check dimensional consistency', 'Estimate order of magnitude'], resources: [{ title: 'Khan Academy algebra', url: 'https://www.khanacademy.org/math/algebra', kind: 'Guide', language: 'English' }] }, { id: 'ma-02', title: 'Trigonometry for three-phase systems', minutes: 45, summary: 'Connect triangles, phase angles and power-factor calculations.', objectives: ['Use sine and cosine', 'Interpret phase angle', 'Apply the power triangle'], resources: [{ title: 'Trigonometry — Tamil search', url: yt('trigonometry basics Tamil'), kind: 'Video', language: 'Tamil' }] }] }] }
 ]
 
 export const learningPaths: LearningPath[] = [
+  { id: 'electron-desktop-developer', title: 'Electron Desktop Developer', description: 'Start with core programming habits, build and package a secure Electron app, then document technical decisions clearly.', courseIds: ['python-foundations', 'electron-typescript-14-day', 'technical-writing'], icon: '◈' },
   { id: 'electrical-designer', title: 'LV Design Professional', description: 'From applied maths through a complete low-voltage design capstone.', courseIds: ['math-refresh', 'lv-design', 'technical-writing'], icon: '⚡' },
   { id: 'engineering-automation', title: 'Engineering Automation', description: 'Pair practical Python with electrical engineering workflows.', courseIds: ['python-foundations', 'lv-design'], icon: '⌘' },
   { id: 'ai-product-builder', title: 'AI Product Builder', description: 'Learn Python foundations, build reliable AI features and communicate technical decisions clearly.', courseIds: ['python-foundations', 'ai-app-builder', 'technical-writing'], icon: '✺' }
