@@ -4,6 +4,606 @@ const yt = (query: string) => `https://www.youtube.com/results?search_query=${en
 
 export const courses: Course[] = [
   {
+    "id": "ai-assisted-programming-8020",
+    "title": "AI-Assisted Programming — Pareto 80/20 (21 Days)",
+    "category": "Programming",
+    "level": "Beginner",
+    "accent": "#16876b",
+    "icon": "⚙",
+    "featured": true,
+    "description": "45–60 minutes daily. Learn the highest-value TypeScript, Electron, Git, debugging and local AI tool-calling skills for LV Design Suite. Tamil-first resources, daily exercises, weekly capstones; defer deep fine-tuning and advanced theory.",
+    "modules": [
+      {
+        "id": "pareto-m1",
+        "title": "Week 1 · Practical TypeScript",
+        "description": "Master only the programming patterns repeatedly used in LV Design Suite.",
+        "lessons": [
+          {
+            "id": "pareto-01",
+            "title": "Day 1: TypeScript values and types",
+            "minutes": 60,
+            "summary": "Read and change a typed electrical-load object. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Identify string, number, boolean and typed fields",
+              "Read and change a typed electrical-load object",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=TypeScript%20types%20variables%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-02",
+            "title": "Day 2: Objects, arrays and JSON",
+            "minutes": 60,
+            "summary": "Represent an MDB with three DBs as JSON. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Inspect properties, arrays and nested SLD design data",
+              "Represent an MDB with three DBs as JSON",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=JavaScript%20objects%20arrays%20JSON%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Object_basics",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-03",
+            "title": "Day 3: Functions and parameters",
+            "minutes": 60,
+            "summary": "Create a typed three-phase current helper. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Explain inputs, outputs, units and assumptions",
+              "Create a typed three-phase current helper",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=TypeScript%20functions%20tutorial%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://www.typescriptlang.org/docs/handbook/2/functions.html",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-04",
+            "title": "Day 4: Conditions and loops",
+            "minutes": 60,
+            "summary": "Flag missing feeder inputs before calculations. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Use if statements and array iteration for validation",
+              "Flag missing feeder inputs before calculations",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=JavaScript%20if%20loops%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-05",
+            "title": "Day 5: Async/await and APIs",
+            "minutes": 60,
+            "summary": "Call a local mock API and handle loading/error states. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Understand promises and await in UI code",
+              "Call a local mock API and handle loading/error states",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=JavaScript%20async%20await%20fetch%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Async_JS/Promises",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-06",
+            "title": "Day 6: Git and GitHub essentials",
+            "minutes": 60,
+            "summary": "Create a branch, inspect diff and safely commit. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Run status, diff, add, commit and switch",
+              "Create a branch, inspect diff and safely commit",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=Git%20GitHub%20beginners%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://git-scm.com/book/en/v2",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-07",
+            "title": "Day 7: Week 1 capstone: calculation utility",
+            "minutes": 60,
+            "summary": "Build a typed input-to-result helper with a simple test. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Combine types, validation and functions",
+              "Build a typed input-to-result helper with a simple test",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=TypeScript%20mini%20project%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://www.typescriptlang.org/docs/",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ],
+            "quiz": [
+              {
+                "id": "pareto-q7",
+                "prompt": "What is the best evidence that this milestone is complete?",
+                "options": [
+                  "AI generated code without checking",
+                  "A working example with verified output and a short explanation",
+                  "Watching a long video",
+                  "Memorizing framework internals"
+                ],
+                "answer": 1,
+                "explanation": "The Pareto plan prioritizes practical verified skills, not time spent or unreviewed AI output."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "pareto-m2",
+        "title": "Week 2 · Electron, debugging & tests",
+        "description": "Understand app boundaries and verify AI-assisted changes.",
+        "lessons": [
+          {
+            "id": "pareto-08",
+            "title": "Day 8: Electron process model",
+            "minutes": 60,
+            "summary": "Identify main, preload and renderer files in LV Design Suite. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Understand which process owns each responsibility",
+              "Identify main, preload and renderer files in LV Design Suite",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=Electron%20JS%20tutorial%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://www.electronjs.org/docs/latest/tutorial/process-model",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-09",
+            "title": "Day 9: React component essentials",
+            "minutes": 60,
+            "summary": "Inspect and edit one existing design-panel component. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Read props, state and event handlers without mastering React internals",
+              "Inspect and edit one existing design-panel component",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=React%20components%20useState%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://react.dev/learn",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-10",
+            "title": "Day 10: Electron IPC and contextBridge",
+            "minutes": 60,
+            "summary": "Create a narrow typed UI-to-main test command. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Avoid unrestricted Node access from renderer",
+              "Create a narrow typed UI-to-main test command",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=Electron%20IPC%20contextBridge%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://www.electronjs.org/docs/latest/tutorial/ipc",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-11",
+            "title": "Day 11: Validation and errors",
+            "minutes": 60,
+            "summary": "Reject missing or invalid electrical design inputs. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Handle errors visibly and validate unknown data",
+              "Reject missing or invalid electrical design inputs",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=Zod%20TypeScript%20validation%20tutorial",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://zod.dev/",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-12",
+            "title": "Day 12: Debugging real application code",
+            "minutes": 60,
+            "summary": "Reproduce an error and trace its source. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Use console, breakpoints and stack traces",
+              "Reproduce an error and trace its source",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=JavaScript%20debugging%20Tamil%20tutorial",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://developer.chrome.com/docs/devtools/javascript",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-13",
+            "title": "Day 13: Unit tests for calculations",
+            "minutes": 60,
+            "summary": "Check a verified three-phase-current example and edge cases. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Run tests and identify regression failures",
+              "Check a verified three-phase-current example and edge cases",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=TypeScript%20unit%20testing%20Vitest%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://vitest.dev/guide/",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-14",
+            "title": "Day 14: Week 2 capstone: calculation panel",
+            "minutes": 60,
+            "summary": "Propose a simple safe calculation-panel change. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Connect UI, typed values, validation and tests",
+              "Propose a simple safe calculation-panel change",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=Electron%20React%20TypeScript%20project%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://www.electronjs.org/docs/latest/tutorial/quick-start",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ],
+            "quiz": [
+              {
+                "id": "pareto-q14",
+                "prompt": "What is the best evidence that this milestone is complete?",
+                "options": [
+                  "AI generated code without checking",
+                  "A working example with verified output and a short explanation",
+                  "Watching a long video",
+                  "Memorizing framework internals"
+                ],
+                "answer": 1,
+                "explanation": "The Pareto plan prioritizes practical verified skills, not time spent or unreviewed AI output."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "pareto-m3",
+        "title": "Week 3 · Local AI & LV design tools",
+        "description": "Prototype a safe built-in assistant without training from scratch.",
+        "lessons": [
+          {
+            "id": "pareto-15",
+            "title": "Day 15: Local LLM fundamentals and Ollama",
+            "minutes": 60,
+            "summary": "Run a small compatible local model on the Mac. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Understand model selection, context and local inference",
+              "Run a small compatible local model on the Mac",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=Ollama%20local%20LLM%20Tamil%20tutorial",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://docs.ollama.com/",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-16",
+            "title": "Day 16: Prompt context for LV design",
+            "minutes": 60,
+            "summary": "Write a precise MDB and outgoing DB design request. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Separate known inputs, assumptions and acceptance checks",
+              "Write a precise MDB and outgoing DB design request",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=AI%20prompt%20engineering%20Tamil%20tutorial",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://docs.ollama.com/",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-17",
+            "title": "Day 17: Structured JSON AI responses",
+            "minutes": 60,
+            "summary": "Request an SLD command with a strict schema. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Parse and validate model output before using it",
+              "Request an SLD command with a strict schema",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=LLM%20structured%20outputs%20JSON%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://docs.ollama.com/capabilities/structured-outputs",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-18",
+            "title": "Day 18: AI tool calling to calculations",
+            "minutes": 60,
+            "summary": "Wire a mock AI tool to a deterministic calculation. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Keep calculation execution under application control",
+              "Wire a mock AI tool to a deterministic calculation",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=Ollama%20tool%20calling%20TypeScript%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://docs.ollama.com/capabilities/tool-calling",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-19",
+            "title": "Day 19: Preview, approval and rollback",
+            "minutes": 60,
+            "summary": "Preview proposed SLD edits and reject unsafe commands. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Enforce review, approval and undo before write operations",
+              "Preview proposed SLD edits and reject unsafe commands",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=AI%20tool%20calling%20safety%20validation",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://www.electronjs.org/docs/latest/tutorial/security",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-20",
+            "title": "Day 20: RAG fundamentals and references",
+            "minutes": 60,
+            "summary": "Retrieve a relevant LV design reference and show its source. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Understand embedding, retrieval and standards-version limits",
+              "Retrieve a relevant LV design reference and show its source",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=RAG%20embeddings%20tutorial%20Tamil",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://python.langchain.com/docs/tutorials/rag/",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ]
+          },
+          {
+            "id": "pareto-21",
+            "title": "Day 21: Final capstone: AI-assisted SLD draft",
+            "minutes": 60,
+            "summary": "Have AI propose MDB and three outgoing DBs using validated JSON. Practice 10 minutes learning, 20 minutes reading an example, 25 minutes building with AI, 5 minutes reviewing.",
+            "objectives": [
+              "Demo prompt → validated command → preview → approval; defer real electrical sizing until verified",
+              "Have AI propose MDB and three outgoing DBs using validated JSON",
+              "Explain the change in your own words and record one takeaway"
+            ],
+            "resources": [
+              {
+                "title": "Tamil-first video search",
+                "url": "https://www.youtube.com/results?search_query=Ollama%20Electron%20AI%20agent%20tutorial",
+                "kind": "Video",
+                "language": "Tamil"
+              },
+              {
+                "title": "Official reference (English)",
+                "url": "https://docs.ollama.com/capabilities/tool-calling",
+                "kind": "Guide",
+                "language": "English"
+              }
+            ],
+            "quiz": [
+              {
+                "id": "pareto-q21",
+                "prompt": "What is the best evidence that this milestone is complete?",
+                "options": [
+                  "AI generated code without checking",
+                  "A working example with verified output and a short explanation",
+                  "Watching a long video",
+                  "Memorizing framework internals"
+                ],
+                "answer": 1,
+                "explanation": "The Pareto plan prioritizes practical verified skills, not time spent or unreviewed AI output."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     id: 'lv-design', title: 'Advanced LV Electrical Design', category: 'Electrical', level: 'Advanced', accent: '#e85d3f', icon: '⚡', featured: true,
     description: 'Design safe, coordinated and buildable low-voltage systems from load schedule to final documentation.',
     modules: [
@@ -168,6 +768,7 @@ export const courses: Course[] = [
 ]
 
 export const learningPaths: LearningPath[] = [
+  { id: 'lv-ai-pareto-builder', title: 'LV Design AI — 80/20 Builder', description: 'A 21-day practical path to understand and control AI-generated TypeScript/Electron code and safely connect local AI to LV Design Suite.', courseIds: ['ai-assisted-programming-8020'], icon: '⚙' },
   { id: 'electron-desktop-developer', title: 'Electron Desktop Developer', description: 'Start with core programming habits, build and package a secure Electron app, then document technical decisions clearly.', courseIds: ['python-foundations', 'electron-typescript-14-day', 'technical-writing'], icon: '◈' },
   { id: 'electrical-designer', title: 'LV Design Professional', description: 'From applied maths through a complete low-voltage design capstone.', courseIds: ['math-refresh', 'lv-design', 'technical-writing'], icon: '⚡' },
   { id: 'engineering-automation', title: 'Engineering Automation', description: 'Pair practical Python with electrical engineering workflows.', courseIds: ['python-foundations', 'lv-design'], icon: '⌘' },
